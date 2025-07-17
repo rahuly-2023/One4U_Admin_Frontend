@@ -24,7 +24,7 @@ const Login = () => {
         const reply = response.data.message;
         const token = response.data.token;
 
-        localStorage.setItem('token', token);
+        localStorage.setItem('admintoken', token);
         navigate('/home'); // ✅ navigate works here
 
         toast(reply, {

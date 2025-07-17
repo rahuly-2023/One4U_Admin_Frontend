@@ -19,14 +19,14 @@ const Header = () => {
 
   useEffect(() => {
     const updateLoginStatus = () => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('admintoken');
       setIsLoggedIn(!!token);
     };
 
     updateLoginStatus();
     window.addEventListener('auth-changed', updateLoginStatus);
 
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('admintoken')) {
       navigate('/home');
     }
 
@@ -34,7 +34,7 @@ const Header = () => {
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('admintoken');
     window.dispatchEvent(new Event('auth-changed'));
     navigate('/login');
   };
@@ -44,7 +44,7 @@ const Header = () => {
       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/specialrequest`, {
         data: temperature,
         requestType: "AC",
-        Token: localStorage.getItem('token'),
+        Token: localStorage.getItem('admintoken'),
       });
 
       toast(response.data, {
@@ -73,7 +73,7 @@ const Header = () => {
       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/specialrequest`, {
         data: tableNumber,
         requestType: "clean",
-        Token: localStorage.getItem('token'),
+        Token: localStorage.getItem('admintoken'),
       });
 
       toast(response.data, {

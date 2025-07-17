@@ -44,7 +44,7 @@ const AdminDashboard = () => {
   const [hourlyOrderData, setHourlyOrderData] = useState({});
   const [topItemsPerHour, setTopItemsPerHour] = useState({});
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('admintoken');
   const [todayOrders, setTodayOrders] = useState([]);
   const [foodWasteMetrics, setFoodWasteMetrics] = useState({
     cancelledOrders: 0,
