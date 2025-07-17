@@ -1,3 +1,5 @@
+// admin_frontend/src/pages/Home.jsx
+
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import FoodCategoryManagement from '../Components/Admin/FoodCategoryManagement';
@@ -73,6 +75,18 @@ const AdminDashboard = () => {
           return exists ? prev : [order, ...prev];
         });
         toast.info('📦 New order received!');
+      });
+
+
+      socket.on('order-updated', ({ orderId, status }) => {
+        setPendingOrders((prev) =>
+          prev.map((order) =>
+            order._id === orderId ? { ...order, status } : order
+          )
+        );
+        if(status=="cancelled"){
+          toast.error(`Order ${orderId} is cancelled`);
+        }
       });
 
       return () => {
@@ -223,6 +237,29 @@ const AdminDashboard = () => {
     }
   };
 
+
+
+  // NOW
+  const handleStatusChange = async (orderId, newStatus) => {
+    try {
+      await axios.put(`${import.meta.env.VITE_API_USER_BASE_URL}/api/orders/${orderId}/status`, {
+        status: newStatus
+      });
+
+      toast.success(`Order marked as ${newStatus}`);
+
+      // ✅ Inline update to avoid full refresh
+      setPendingOrders(prev =>
+        prev.map(order =>
+          order._id === orderId ? { ...order, status: newStatus } : order
+        )
+      );
+    } catch (err) {
+      console.error(err);
+      toast.error('Status update failed');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <div className="flex-grow container mx-auto px-4 py-8">
@@ -263,6 +300,7 @@ const AdminDashboard = () => {
           <OrderManagement 
             pendingOrders={pendingOrders} 
             handleCompleteOrder={handleCompleteOrder} 
+            updateStatus={handleStatusChange}       //NOW
           />
         ) : activeTab === 'requests' ? (
           <RequestManagement 
