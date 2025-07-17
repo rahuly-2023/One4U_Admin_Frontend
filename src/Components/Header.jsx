@@ -1,3 +1,5 @@
+// admin_frontend/src/Components/Header.jsx
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaBell } from 'react-icons/fa';
@@ -99,7 +101,13 @@ const Header = () => {
         <div className="text-2xl font-bold text-green-600">
           <a href='/home'>🍽️ One4U</a>
         </div>
-        <div className='justify-center'>ADMIN  PORTAL</div>
+        {/* <div className='justify-center'>ADMIN  PORTAL</div> */}
+
+        {isLoggedIn ? (
+          <div className='justify-center ml-5'>ADMIN  PORTAL</div>
+        ) : (
+          <div className='justify-center'>ADMIN  PORTAL</div>
+        )}
         <ToastContainer />
 
         {isLoggedIn && (
@@ -217,12 +225,13 @@ const Header = () => {
               </div>
             </>
           ) : (
-            <button
-              className="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition"
-              onClick={() => navigate('/login')}
-            >
-              Order Now
-            </button>
+            // <button
+            //   className="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition"
+            //   onClick={() => navigate('/login')}
+            // >
+            //   Order Now
+            // </button>
+            <div></div>
           )}
         </div>
       </div>

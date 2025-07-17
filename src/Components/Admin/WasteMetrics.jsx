@@ -1,3 +1,5 @@
+// admin_frontend/src/Components/Admin/WasteNetrics.jsx
+
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
 

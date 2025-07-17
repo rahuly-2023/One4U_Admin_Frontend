@@ -1,3 +1,5 @@
+// admin_frontend/src/Components/Admin/SummaryCards.jsx
+
 import React from 'react';
 
 const SummaryCards = ({ todayOrders, foodWasteMetrics }) => {

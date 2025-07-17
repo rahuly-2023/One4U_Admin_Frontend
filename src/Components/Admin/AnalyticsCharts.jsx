@@ -1,3 +1,5 @@
+// admin_frontend/src/Components/Admin/AnalyticsCharts.jsx
+
 import React from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 
@@ -82,13 +84,13 @@ const AnalyticsCharts = ({ hourlyOrderData, topItemsPerHour }) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
-        <h2 className="text-xl font-bold mb-4 text-gray-800">Today's Orders per Hour</h2>
+        <h2 className="text-xl font-bold mb-4 text-gray-800">Average Orders per Hour</h2>
         <div className="h-64">
           <Line data={lineData} options={chartOptions} />
         </div>
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
-        <h2 className="text-xl font-bold mb-4 text-gray-800">Top Ordered Items per Hour</h2>
+        <h2 className="text-xl font-bold mb-4 text-gray-800">Most Ordered Items per Hour</h2>
         <div className="h-64">
           <Bar data={barData} options={chartOptions} />
         </div>
